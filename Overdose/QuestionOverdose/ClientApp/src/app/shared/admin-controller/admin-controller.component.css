@@ -1,0 +1,9 @@
+.tag-remove::before {
+  content: 'x';
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+h4 {
+  color: black;
+}

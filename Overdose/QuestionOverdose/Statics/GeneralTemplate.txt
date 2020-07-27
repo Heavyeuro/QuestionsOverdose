@@ -1,0 +1,4 @@
+﻿--Title--
+Dear, --UserName--!
+--Content--
+Please, confirm  --confirmationUrl--

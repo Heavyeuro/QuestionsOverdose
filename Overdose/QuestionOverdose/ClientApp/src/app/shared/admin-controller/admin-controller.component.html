@@ -1,0 +1,14 @@
+<div (click)="$event.stopPropagation()">
+  <button class="btn btn-primary btn-sm btm-small" (click)="openModal(modalId)">Edit</button>
+  <button class="btn btn-primary btn-sm tag-remove btm-small" (click)="toDelete()"></button>
+</div>
+
+<jw-modal id="{{modalId}}">
+  <h4>Edit following text.</h4>
+  <p>
+    <textarea [(ngModel)]="stringToRedact"  rows="4" cols="50">
+</textarea>
+  </p>
+  <button class="btn-primary" (click)="toEdit(modalId)">Submit</button>
+  <button class="btn-primary" (click)="closeModal(modalId)">Close</button>
+</jw-modal>

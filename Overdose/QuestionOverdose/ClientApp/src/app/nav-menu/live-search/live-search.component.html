@@ -1,0 +1,14 @@
+<input type="text"
+       placeholder="enter question title..."
+       [value]="currentTitle"
+       (input)="searchQuestions($event.target.value)">
+
+       <!--(input)="searchQuestions($event.target.value)">-->
+
+<ng-container *ngIf="showResult && (questions$ | async) as questions">
+  <ul>
+    <li *ngFor="let question of questions">
+      <a class="navbar-brand" [routerLink]="['question/' + question.id]" (click)="onLinkClick()">{{question.title}}</a>
+    </li>
+  </ul>
+</ng-container>

@@ -1,0 +1,25 @@
+<div class="card" [appHighlight] *ngFor="let question of questionModel.questionModels" (click)="viewQuestion(question)">
+  <admin-controller class="admin-controller offset-9 col-3" *ngIf="canEdit(question.id)"
+                    [stringToRedact]="question.body"
+                    [objectId]="question.id"
+                    (toDeleteObjectId)="onDeleteQuestion($event)"
+                    (editedString)="onEditQuestion($event)">
+  </admin-controller>
+  <div class="row">
+    <question-element  class="col-12"
+                      [question]="question"
+                      [currentUser]="currentUser"
+                      (tag)="onTagNavigate($event)">
+    </question-element>
+  </div>
+</div>
+
+<app-paging *ngIf="isDownloaded else loading"
+            [pageNumber]="questionModel.pageModel.pageNumber"
+            [totalItems]="questionModel.pageModel.totalItems"
+            (pageToNavigate)="onNavigate($event)">
+</app-paging>
+
+<ng-template #loading>
+  <span class="spinner-border spinner-border-sm mr-1"></span>
+</ng-template>

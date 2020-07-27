@@ -1,0 +1,42 @@
+<!--<div *ngIf="pageService.dispForm">-->
+  <div>
+    <ul class="pagination pagination-sm">
+
+      <li class="page-item" *ngIf="pageService.dispFirstPage()"
+          (click)="navigate(1)">
+        <a class="page-link"> 1 </a>
+      </li>
+
+      <li class="page-item disabled" *ngIf="pageService.dispLeftDots()">
+        <a class="page-link"> ... </a>
+      </li>
+
+      <li class="page-item " *ngIf="pageService.hasPreviousPage()"
+          (click)="navigate(pageService.pageModel.pageNumber - 1)">
+        <a class="page-link" >
+        {{pageService.pageModel.pageNumber-1}} </a>
+      </li>
+
+      <li class="page-item active" (click)="navigate(pageService.pageModel.pageNumber)">
+        <a class="page-link" >
+        {{pageService.pageModel.pageNumber}}</a>
+      </li>
+
+      <li class="page-item " *ngIf="pageService.hasNextPage()"
+          (click)="navigate(pageService.pageModel.pageNumber + 1)">
+        <a class="page-link" >
+        {{pageService.pageModel.pageNumber+1}} </a>
+      </li>
+
+      <li class="page-item disabled" *ngIf="pageService.dispRightDots()">
+        <a class="page-link"> ... </a>
+      </li>
+
+      <li class="page-item " *ngIf="pageService.dispLastPage()"
+          (click)="navigate(pageService.pageModel.totalPages)">
+        <a class="page-link" >
+        {{pageService.pageModel.totalPages}} </a>
+      </li>
+    </ul>
+  </div>
+<!--</div>-->

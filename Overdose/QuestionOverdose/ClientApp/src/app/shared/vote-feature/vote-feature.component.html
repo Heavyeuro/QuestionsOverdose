@@ -1,0 +1,12 @@
+<div (click)="$event.stopPropagation()">
+  <div class="arrow-up" [appHighlight]
+       *ngIf="!votingModel.isDisabled && votingModel.canVote" (click)="vote(true)">
+  </div>
+  <div class="arrow-up arrow-top" *ngIf="votingModel.isDisabled && votingModel.isUpvote"></div>
+  <h6 *ngIf="!votingModel.canVote"> Votes:</h6>
+  <h5 class="votes-icon">{{votingModel.votes}}</h5>
+  <div class="arrow-down" [appHighlight]
+       *ngIf="!votingModel.isDisabled && votingModel.canVote" (click)="vote(false)">
+  </div>
+  <div class="arrow-down arrow-bot" *ngIf="votingModel.isDisabled && !votingModel.isUpvote"></div>
+</div>

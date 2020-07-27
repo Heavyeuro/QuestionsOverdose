@@ -1,0 +1,52 @@
+<div class="jumbotron row">
+  <div class="col-sm-8 ">
+    <p>Username: {{profile.username}}</p>
+    <hr />
+    <p>Email: {{profile.email}}</p>
+    <hr />
+    <p>Subscribed tags:</p>
+    <ul>
+      <li *ngFor="let tag of profile.subscribedTags">
+        {{ tag }}
+      </li>
+    </ul>
+    <hr />
+    <p *ngIf="profile.fullName;else unset">
+      Your full name : {{profile.fullName}}
+    </p>
+    <ng-template #unset>
+      <p>Please, enter your full name (button on sidebar)</p>
+    </ng-template>
+
+    <p *ngIf="!profile.email">Please, check your email and follow verify link</p>
+
+    <div [ngSwitch]="displayForm">
+      <ng-template ngSwitchCase="None"></ng-template>
+      <ng-template ngSwitchCase="ChangePass"><password-form></password-form></ng-template>
+      <ng-template ngSwitchCase="ChangeEmail"><email-form></email-form></ng-template>
+      <ng-template ngSwitchCase="ChangeName"><name-form></name-form></ng-template>
+      <ng-template ngSwitchCase="SubscribeTag"><subscribe-tag></subscribe-tag></ng-template>
+      <ng-template ngSwitchDefault>Sorry, service isn`t available</ng-template>
+    </div>
+  </div>
+
+  <div class="col-sm-4 ">
+    <button class="btn btn-block btn-primary btn-l"
+            *ngIf="!profile.fullname  &&displayForm!='ChangeName'"
+            (click)="displayChangeName()">Add full name</button>
+
+    <button class="btn btn-block btn-primary btn-l"
+            *ngIf="profile.fullname && displayForm!='ChangeName'"
+            (click)="displayChangeName()">Change name</button>
+
+    <button class="btn btn-block btn-primary btn-l"
+            *ngIf="displayForm!='ChangeEmail'" (click)="displayChangeEmail()">Change Email</button>
+
+    <button class="btn btn-block btn-primary btn-l"
+            *ngIf="!profile.isEmailVerified" (click)="resendEmail()">Resend email</button>
+
+    <button class="btn btn-block btn-primary btn-l"
+            *ngIf="displayForm!='ChangePass'"  (click)="displayChangePass()">Change password</button>
+  </div>
+
+</div>

@@ -1,0 +1,40 @@
+<div class="card-body" >
+  <div class="row">
+    <div class="col-6">
+      <h5 class="card-title">{{question.title | slice: 0: 14}}</h5>
+    </div>
+    <div class="col-2">
+      <h6 class="mb-2 text-muted">Author: {{question.authorName}}</h6>
+    </div>
+    <div class="col-3">
+      <h6 class="mb-2 text-muted">{{question.dateOfPublication | date:'short'}}</h6>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <vote-feature (click)="$event.stopPropagation()"
+                    [votingModel]="question.votingModel"
+                    (newVotesNumber)="onVote($event)">
+      </vote-feature>
+    </div>
+    <div class="col-2">
+      <h6 class="card-subtitle mb-4 text-muted">Views:<br/>{{question.views}}</h6>
+    </div>
+
+    <div class="col-4">
+      <h6 *ngIf="question.isAnswered; else notAnswered">Answered</h6>
+      <ng-template #notAnswered>Not answered</ng-template>
+    </div>
+
+    <div class="col-11">
+      <p class="card-text">{{question.body}}</p>
+    </div>
+    <div class="col-12" (click)="$event.stopPropagation()">
+      <button type="button" class="btn btn-primary btn-sm col-2"
+              *ngFor="let tag of question.tagNames" (click)="navigateOnTag(tag)">
+        {{tag|slice:0:10}}
+      </button>
+    </div>
+  </div>
+</div>

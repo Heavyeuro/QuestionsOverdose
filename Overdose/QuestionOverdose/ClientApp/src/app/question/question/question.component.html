@@ -1,0 +1,92 @@
+<div class="row">
+  <!--Question-->
+  <div class="card border-primary col-12" [appHighlight] [makeHighlight]="makeHighlight(!showAnswerForm)" (click)="addAnswer()">
+    <div class="card-header">
+      Author: {{questionModel.authorName}} ({{questionModel.dateOfPublication | date:mediumDate}})
+    </div>
+    <div class="card-body">
+      <h4 class="card-title">Title: {{questionModel.title}}</h4>
+      <p class="card-text">{{questionModel.body}}</p>
+    </div>
+    <answer-form *ngIf="showAnswerForm"
+                 [questionInput]="questionModel"
+                 (formValues)="onSubmit($event)">
+    </answer-form>
+  </div>
+
+  <div class="col-11 offset-md-1" *ngFor="let answer of questionModel.answerModels">
+    <div class="col-md-12">
+      <!--Answer-->
+      <div class="card" [appHighlight] [makeHighlight]="makeHighlight(!answer.displayForm)" (click)="answerFormShow(answer)">
+        <admin-controller class="admin-controller offset-9 col-3" *ngIf="canEditAnswer(answer.id)"
+                          [stringToRedact]="answer.body"
+                          [objectId]="answer.id"
+                          (toDeleteObjectId)="onDeleteAnswer($event)"
+                          (editedString)="onEditAnswer($event)">
+        </admin-controller>
+        <div class="row">
+          <div class="card-header col-8">Author: {{answer.authorName}} ({{answer.dateOfPublication | date:mediumDate}})</div>
+        </div>
+        <div class="row">
+          <div class="card-body col-2">
+            <vote-feature (click)="$event.stopPropagation()"
+                          [votingModel]="answer.votingModel"
+                          (newVotesNumber)="onVote($event)">
+            </vote-feature>
+          </div>
+          <div class="card-body col-10">
+            <p class="card-text">{{answer.body}}</p>
+          </div>
+        </div>
+        <div (click)="$event.stopPropagation()">
+          <button class="btn btn-primary btn-sm col-2" *ngIf="canMarkAsAnswer()" (click)="markAsAnswer(answer.id)">
+            Mark as answer
+          </button>
+          <div class="check-sign" *ngIf="answer.isAnswer">
+            <div id="check-part-1" class="check-sign"></div>
+            <div id="check-part-2" class="check-sign"></div>
+          </div>
+          <p class="offset-1" *ngIf="answer.isAnswer">Answer
+          <p>
+        </div>
+        <comment-form *ngIf="answer.displayForm"
+                      [answerInput]="answer"
+                      (formValues)="onRequest($event)">
+        </comment-form>
+      </div>
+
+      <div class=" offset-md-1" *ngFor="let comment of answer.comments">
+        <!--Comment-->
+        <div class="card" [appHighlight] [makeHighlight]="makeHighlight(!comment.displayForm)" (click)="commentFormShow(comment)">
+          <div class="row">
+            <div class="card-body col-9">{{comment.authorName}} ({{comment.dateOfCreation | date:mediumDate}}): {{comment.body}}</div>
+            <admin-controller class="admin-controller col-3" *ngIf="canEditComment(comment.id)"
+                              [stringToRedact]="comment.body"
+                              [objectId]="comment.id"
+                              (toDeleteObjectId)="onDeleteComment($event)"
+                              (editedString)="onEditComment($event)">
+            </admin-controller>
+          </div>
+          <comment-form *ngIf="comment.displayForm"
+                        [answerInput]="answer"
+                        [commentInput]="comment"
+                        (formValues)="onRequest($event)">
+          </comment-form>
+        </div>
+
+        <!--Comment child-->
+        <div class="offset-1" *ngFor="let commentChild of comment.commentChilds">
+          <div class="app-card row">
+            <p class="card-text col-9">{{commentChild.authorName}} ({{commentChild.dateOfCreation | date:mediumDate}}): {{commentChild.body}}</p>
+            <admin-controller class="admin-controller col-3" *ngIf="canEditComment(comment.id)"
+                              [stringToRedact]="commentChild.body"
+                              [objectId]="commentChild.id"
+                              (toDeleteObjectId)="onDeleteSubComment($event)"
+                              (editedString)="onEditSubComment($event)">
+            </admin-controller>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

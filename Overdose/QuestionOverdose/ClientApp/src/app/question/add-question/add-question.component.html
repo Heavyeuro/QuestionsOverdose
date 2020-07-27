@@ -1,0 +1,36 @@
+<h5>Creating  new question</h5>
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+  <div class="form-group">
+    <label>Title</label>
+    <input class="form-control" name="Title" formControlName="Title" />
+
+    <div class="alert alert-danger"
+         *ngIf="form.controls['Title'].invalid && form.controls['Title'].touched">
+      Please, specify title
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Body</label>
+    <textarea class="form-control" name="Body" formControlName="Body" cols="4" rows="5"></textarea>
+
+    <div class="alert alert-danger"
+         *ngIf="form.controls['Body'].invalid && form.controls['Body'].touched">
+      Please, specify body
+    </div>
+  </div>
+
+  <h6>Specify tag that are related to your question</h6>
+  <ng-multiselect-dropdown name="selectedTags"
+                           [placeholder]="'Select Tag'"
+                           [data]="allTags"
+                           [(ngModel)]="selectedItems"
+                           [disabled]="disabled"
+                           formControlName="selectedTags"
+                           [settings]="dropdownSettings">
+  </ng-multiselect-dropdown>
+  <br>
+  <button [disabled]="!form.valid">Add question</button>
+</form>
+

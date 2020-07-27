@@ -1,0 +1,11 @@
+<form class="col-11 offset-1" [formGroup]="bodyForm" (ngSubmit)="submit()">
+    <label>
+      Comment body
+    </label>
+    <br/> 
+    <textarea formControlName="Body" class="col-10" rows="2"></textarea>
+    <br/>
+    <button type="submit" class="btn btn-primary btn-sm"
+    [disabled]="!bodyForm.valid">Submit</button>
+</form>
+<br/>

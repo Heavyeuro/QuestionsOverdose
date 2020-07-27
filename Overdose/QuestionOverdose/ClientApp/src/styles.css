@@ -1,0 +1,63 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Provide sufficient contrast against white background */
+a { color: #0366d6; }
+
+code { color: #e01a76; }
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.admin-controller
+{
+margin-bottom: -3%;
+margin-top: -3%;
+}
+
+.btn {
+  margin: 6px;
+}
+
+.btm-small {
+  padding-top: 0px;
+  padding-bottom: 2px;
+}
+
+.card { margin: 27px; }
+
+input.ng-touched.ng-invalid { border: solid red 2px; }
+
+input.ng-touched.ng-valid { border: solid green 2px; }
+
+check-wrap {
+  position: relative;
+  margin-top: 100px;
+}
+
+.check-sign {
+  position: absolute;
+  background: greenyellow;
+}
+
+#check-part-1 {
+  width: 15px;
+  height: 5px;
+  transform: rotate(45deg);
+}
+
+#check-part-2 {
+  width: 20px;
+  height: 5px;
+  transform: rotate(-45deg);
+  left: 6px;
+  top: -2.5px;
+}
+
+.app-card {
+  margin: 20px;
+  background-color: #282828;
+  border-radius: 4px;
+}

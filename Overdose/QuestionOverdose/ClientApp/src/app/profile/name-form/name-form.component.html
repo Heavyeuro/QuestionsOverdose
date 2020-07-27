@@ -1,0 +1,9 @@
+<div class="card text-white bg-secondary col-sm-8 offset-2">
+  <h5 class="card-title ">Change name</h5>
+  <div class="form-group">
+    <input class="form-control" name="fullName" [(ngModel)]="modelUser.fullName" required>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-primary" (click)="changeName()">Submit</button>
+  </div>
+</div>
